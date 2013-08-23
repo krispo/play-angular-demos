@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-bin
-logs
-=======
 # Extracted from https://github.com/ulrich/macaron-factory/blob/master/.gitignore
 # Ignore all dotfiles...
 .*
@@ -9,35 +5,22 @@ logs
 !.gitignore
 
 # Ignore Play! working directory #
-db
-eclipse
+bin
 lib
 log
 logs
 modules
 precompiled
->>>>>>> 84eb5d5956b1857fa86f3d79b7ed2eb50f118275
+db
+eclipse
 project/project
 project/target
 target
 tmp
-<<<<<<< HEAD
 dist
 /out
 /RUNNING_PID
-/.idea_modules
-/.history
-/.target
-/.classpath
-/.project
-/.settings
-/.cache
-/.idea
-/.directory
-/*.iml
-=======
 test-result
 server.pid
 *.iml
 *.eml
->>>>>>> 84eb5d5956b1857fa86f3d79b7ed2eb50f118275
