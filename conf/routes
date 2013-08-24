@@ -4,17 +4,21 @@
 
 ## ~~~ Play api routing
 # Home page
-GET   /api/                 controllers.Application.index
+GET   /api/                           controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
-GET   /api/assets/*file     controllers.Assets.at(path="/public", file)
+GET   /api/assets/*file               controllers.Assets.at(path="/public", file)
 
 
 ## ~~~ AngularJS
 # angular-seed app
-GET   /angular-seed/        controllers.UIAssets.at(path = "/demos/angular-seed", file = "index.html")
-GET   /angular-seed/*file   controllers.UIAssets.at(path = "/demos/angular-seed", file)
+GET   /angular-seed/                  controllers.UIAssets.at(path = "/demos/angular-seed", file = "index.html")
+GET   /angular-seed/*file             controllers.UIAssets.at(path = "/demos/angular-seed", file)
+
+# angular-requirejs-seed app
+GET   /angular-requirejs-seed/        controllers.UIAssets.at(path = "/demos/angular-requirejs-seed", file = "index.html")
+GET   /angular-requirejs-seed/*file   controllers.UIAssets.at(path = "/demos/angular-requirejs-seed", file)
 
 # main app (the lowest priority)
-GET   /                     controllers.UIAssets.at(path = "/demos/main", file = "index.html")
-GET   /*file                controllers.UIAssets.at(path = "/demos/main", file)
+GET   /                               controllers.UIAssets.at(path = "/demos/main", file = "index.html")
+GET   /*file                          controllers.UIAssets.at(path = "/demos/main", file)
