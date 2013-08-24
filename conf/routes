@@ -2,8 +2,15 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+## ~~~ Play api routing
 # Home page
-GET     /                           controllers.Application.index
+GET   /api/               controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET   /api/assets/*file   controllers.Assets.at(path="/public", file)
+
+
+## ~~~ AngularJS
+# Main app (the lowest priority)
+GET   /                   controllers.UIAssets.at(path = "/demos/main", file = "index.html")
+GET   /*file              controllers.UIAssets.at(path = "/demos/main", file)
