@@ -6,13 +6,8 @@
 
 # Ignore Play! working directory #
 bin
-lib
 log
 logs
-modules
-precompiled
-db
-eclipse
 project/project
 project/target
 target
