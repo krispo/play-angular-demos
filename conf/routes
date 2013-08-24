@@ -9,6 +9,13 @@ GET   /api/                           controllers.Application.index
 # Map static resources from the /public folder to the /assets URL path
 GET   /api/assets/*file               controllers.Assets.at(path="/public", file)
 
+# Obtain require.js with built-in knowledge of how webjars resources can be
+# resolved
+GET   /lib/require.js                 controllers.WebJarAssets.requirejs
+
+# Enable webjar based resources to be returned
+GET   /webjars/*file                  controllers.WebJarAssets.at(file)
+
 
 ## ~~~ AngularJS
 # angular-seed app
@@ -18,6 +25,10 @@ GET   /angular-seed/*file             controllers.UIAssets.at(path = "/demos/ang
 # angular-requirejs-seed app
 GET   /angular-requirejs-seed/        controllers.UIAssets.at(path = "/demos/angular-requirejs-seed", file = "index.html")
 GET   /angular-requirejs-seed/*file   controllers.UIAssets.at(path = "/demos/angular-requirejs-seed", file)
+
+# angular-seed-play app
+GET   /angular-seed-play/             controllers.UIAssets.at(path = "/demos/angular-seed-play", file = "index.html")
+GET   /angular-seed-play/*file        controllers.UIAssets.at(path = "/demos/angular-seed-play", file)
 
 # main app (the lowest priority)
 GET   /                               controllers.UIAssets.at(path = "/demos/main", file = "index.html")
