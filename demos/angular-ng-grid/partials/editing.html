@@ -1,0 +1,12 @@
+<div ng-controller="ctrl_editing">
+	<div class="gridStyle" ng-grid="gridOptions"></div>
+	<div>Selected items: {{ current_selection }}</div>
+	<br/>
+	<div>Current selection: {{ current_selection[0] }}</div>
+	<br/>
+	<div>Current selection pretty: {{ current_selection[0].name }} - {{ current_selection[0].age }}</div>
+	<br/>
+	<div>My data: {{ myData }}</div>
+	<br/>
+	<div>The last element: {{ elem }}</div>
+</div>
