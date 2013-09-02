@@ -35,7 +35,7 @@ angular.module('mainApp.controllers', ['ngGrid'])
 		//enableRowSelection: false,
 		enableCellEdit: true,
 		multiSelect: false,
-		columnsDef:[
+		columnDefs:[
 		{
 			field: 'name',
 			displayName: 'Name',

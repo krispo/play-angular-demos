@@ -38,6 +38,10 @@ GET   /angular-ng-grid/*file          controllers.UIAssets.at(path = "/demos/ang
 GET   /angular-highcharts/            controllers.UIAssets.at(path = "/demos/angular-highcharts", file = "index.html")
 GET   /angular-highcharts/*file       controllers.UIAssets.at(path = "/demos/angular-highcharts", file)
 
+# angular-ng-grid app
+GET   /angular-misc/                  controllers.UIAssets.at(path = "/demos/angular-misc", file = "index.html")
+GET   /angular-misc/*file             controllers.UIAssets.at(path = "/demos/angular-misc", file)
+
 # main app (the lowest priority)
 GET   /                               controllers.UIAssets.at(path = "/demos/main", file = "index.html")
 GET   /*file                          controllers.UIAssets.at(path = "/demos/main", file)
