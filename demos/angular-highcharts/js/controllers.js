@@ -5,7 +5,7 @@
 angular.module('mainApp.controllers', [])
 
 /* Line Chart */
-.controller('ctrl_line', function($scope){
+.controller('lineCtrl', function($scope){
 	$scope.chartOptions = {
 		xAxis: {
 			categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -31,7 +31,7 @@ angular.module('mainApp.controllers', [])
 })
 
 /* Scatter Chart */
-.controller('ctrl_scatter', function($scope){
+.controller('scatterCtrl', function($scope){
 	$scope.chartOptions = {
 		chart: {  
 			type: 'scatter',
@@ -115,7 +115,7 @@ angular.module('mainApp.controllers', [])
 })
 
 /* Bar Chart */
-.controller('ctrl_bar', function($scope) {
+.controller('barCtrl', function($scope) {
 	$scope.chartOptions = {
 		chart: {			
 			type: 'bar'

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" ng-app="mainApp">
+<head>
+    <meta charset="utf-8">
+    <title>Angular-SlickGrid</title>
+    <link rel="stylesheet" href="../lib/slickgrid/css/slick.grid.css" type="text/css"/>
+    <link rel="stylesheet" href="../lib/jquery/css/smoothness/jquery-ui-1.10.3.custom.min.css" type="text/css"/>
+    <link rel="stylesheet" href="../lib/slickgrid/css/examples.css" type="text/css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+<header>
+    <ul class="menu">
+        <br/>
+        <li><a href="../">../</a></li>
+        <br/>
+        <li><a href="#/basic">Basic</a></li>
+        <br/>
+        <li><a href="#/editing">Cell editing</a></li>
+        <br/>
+    </ul>
+</header>
+
+<div ng-view></div>
+
+<script src="../lib/jquery/jquery-1.10.2.min.js"></script>
+<script src="../lib/jquery/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="../lib/jquery/jquery.event.drag-2.2.js"></script>
+<script src="../lib/angular/angular.js"></script>
+
+<script src="../lib/slickgrid/js/slick.core.js"></script>
+<script src="../lib/slickgrid/js/slick.grid.js"></script>
+
+<script src="../lib/slickgrid/js/slick.formatters.js"></script>
+<script src="../lib/slickgrid/js/slick.editors.js"></script>
+<script src="../lib/slickgrid/plugins/slick.cellrangedecorator.js"></script>
+<script src="../lib/slickgrid/plugins/slick.cellrangeselector.js"></script>
+<script src="../lib/slickgrid/plugins/slick.cellselectionmodel.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/directives.js"></script>
+</body>
+</html>

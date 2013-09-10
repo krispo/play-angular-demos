@@ -5,7 +5,7 @@
 angular.module('mainApp.controllers', ['ngGrid'])
 
 /* Basic ng-Grid */
-.controller('ctrl_basic', function($scope) {
+.controller('basicCtrl', function($scope) {
 	$scope.myData = [
 	{name: "Moroni", age: 50},
 	{name: "Tiancum", age: 43},
@@ -17,7 +17,7 @@ angular.module('mainApp.controllers', ['ngGrid'])
 })
 
 /* Editable ng-Grid */
-.controller('ctrl_editing', function($scope) {
+.controller('editingCtrl', function($scope) {
 	$scope.current_selection = [];
 
 	$scope.myData = [
