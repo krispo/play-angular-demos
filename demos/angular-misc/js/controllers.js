@@ -4,18 +4,16 @@
 
 angular.module('mainApp.controllers', ['ngGrid'])
 
-    /* Line Chart */
+    /* HighCharts - ng-Grid */
     .controller('highcharts-nggridCtrl', function($scope){
-        $scope.data1 = [
+        $scope.data = [
             {id: 1, x: 5, y: 3},
             {id: 2, x: 10, y: 17},
             {id: 3, x: 15, y: 4},
             {id: 4, x: 2, y: 8}
         ];
 
-        $scope.selectedPoints = $scope.data1;
-
-        $scope.hello = "Hello World!";
+        $scope.selectedPoints = $scope.data;
 
         $scope.gridOptions = {
             data: 'selectedPoints',
@@ -35,37 +33,114 @@ angular.module('mainApp.controllers', ['ngGrid'])
             ]
         };
 
-        $scope.chartOptions = {
-            chart: {
-                type: 'scatter',
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Scatter Plot'
-            },
-            plotOptions: {
-                scatter: {
-                    allowPointSelect: true,
-                    tooltip: {
-                        headerFormat: '<b>{series.name}</b><br>',
-                        pointFormat: 'x={point.x}, y={point.y}'
-                    },
-                    cursor: 'pointer',
-                    point: {
-                        events: {
-                            select: function() {
-                                $scope.selectedPoints = [];
-                                $scope.selectedPoints.push($scope.data1[this.id-1]);
-                                $scope.$apply();
-                            }
+        $scope.chartOptions = highcharts_nggrid_option($scope);
+    })
+
+    /* HighCharts - SlickGrid */
+    .controller('highcharts-slickgridCtrl', function($scope){
+        //init data
+        $scope.data = [
+            {id: 1, x: 5, y: 3},
+            {id: 2, x: 10, y: 17},
+            {id: 3, x: 15, y: 4},
+            {id: 4, x: 2, y: 8}
+        ];
+
+        $scope.selectedPoints = $scope.data;
+
+        $scope.columns = [
+            {id: "id", name: "ID", field: "id"},
+            {id: "x", name: "X", field: "x", editor: Slick.Editors.Text},
+            {id: "y", name: "Y", field: "y", editor: Slick.Editors.Text}
+        ];
+        $scope.options = {
+            editable: true,
+            enableCellNavigation: true,
+            enableColumnReorder: true,
+            asyncEditorLoading: false,
+            autoEdit:false
+        };
+        // end init data
+
+        $scope.gridOptions = {
+            data: $scope.selectedPoints,
+            columns: $scope.columns,
+            options: $scope.options
+        };
+
+        $scope.chartOptions = highcharts_slickgrid_option($scope);
+    });
+
+function highcharts_nggrid_option(scope){
+    return {
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Scatter Plot'
+        },
+        plotOptions: {
+            scatter: {
+                allowPointSelect: true,
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: 'id={point.id}, x={point.x}, y={point.y}'
+                },
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        select: function() {
+                            scope.selectedPoints = [];
+                            scope.selectedPoints.push(scope.data[this.id-1]);
+                            scope.$apply();
                         }
                     }
                 }
-            },
-            series: [{
-                name: 'Series',
-                color: 'rgba(223, 83, 83, .5)',
-                data: $scope.data1
-            }]
-        };
-    });
+            }
+        },
+        series: [{
+            name: 'Series',
+            color: 'rgba(223, 83, 83, .5)',
+            data: scope.data
+        }]
+    };
+};
+
+function highcharts_slickgrid_option(scope){
+    return {
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Scatter Plot'
+        },
+        plotOptions: {
+            scatter: {
+                allowPointSelect: true,
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: 'id={point.id}, x={point.x}, y={point.y}'
+                },
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        select: function() {
+                            scope.selectedPoints = [];
+                            scope.selectedPoints.push(scope.data[this.id-1]);
+                            scope.grid.setSelectedRows([this.id-1]);
+                            scope.$apply();
+                            console.log('!!! Chart Selection ...')
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Series',
+            color: 'rgba(223, 83, 83, .5)',
+            data: scope.data
+        }]
+    };
+}
