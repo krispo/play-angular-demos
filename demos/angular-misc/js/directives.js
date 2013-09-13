@@ -56,6 +56,14 @@ angular.module('mainApp.directives', [])
                         };
                     });
 
+                    scope.grid.onCellChange.subscribe(function(e,args){
+                        var item = args.item;
+                        console.log(item);
+                        scope.chart.series[0].data[item.id-1].update(item);
+
+                        console.log('Cell have changed...');
+                    });
+
                     console.log(scope.grid);
                 });
             }
