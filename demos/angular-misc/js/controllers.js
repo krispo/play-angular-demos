@@ -46,8 +46,6 @@ angular.module('mainApp.controllers', ['ngGrid'])
             {id: 4, x: 2, y: 8}
         ];
 
-        $scope.selectedPoints = $scope.data;
-
         $scope.columns = [
             {id: "id", name: "ID", field: "id"},
             {id: "x", name: "X", field: "x", editor: Slick.Editors.Text},
@@ -58,17 +56,22 @@ angular.module('mainApp.controllers', ['ngGrid'])
             enableCellNavigation: true,
             enableColumnReorder: true,
             asyncEditorLoading: false,
-            autoEdit:false
+            autoEdit:false,
+            multiSelect: false
         };
         // end init data
 
         $scope.gridOptions = {
-            data: $scope.selectedPoints,
+            data: $scope.data,
             columns: $scope.columns,
             options: $scope.options
         };
 
         $scope.chartOptions = highcharts_slickgrid_option($scope);
+
+        /* Selection */
+        $scope.chartSelectedID = [];
+        $scope.gridSelectedID = [];
     });
 
 function highcharts_nggrid_option(scope){
@@ -127,11 +130,11 @@ function highcharts_slickgrid_option(scope){
                 point: {
                     events: {
                         select: function() {
-                            scope.selectedPoints = [];
-                            scope.selectedPoints.push(scope.data[this.id-1]);
-                            scope.grid.setSelectedRows([this.id-1]);
+                            scope.chartSelectedID = this.id-1;
                             scope.$apply();
-                            console.log('!!! Chart Selection ...')
+                            if(scope.chartSelectedID!=scope.gridSelectedID){
+                                scope.grid.setSelectedRows([this.id-1]);
+                            }
                         }
                     }
                 }
@@ -143,4 +146,4 @@ function highcharts_slickgrid_option(scope){
             data: scope.data
         }]
     };
-}
+};

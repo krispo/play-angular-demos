@@ -46,17 +46,17 @@ angular.module('mainApp.directives', [])
                     scope.grid.setSelectionModel(new Slick.CellSelectionModel());
 
                     scope.grid.onSelectedRowsChanged.subscribe(function(e,args){
-                        var selectedRows = scope.grid.getSelectedRows();
+                        var selectedRow = scope.grid.getSelectedRows()[0];
 
-                        /*for(var i=0; i<selectedRows.length; i++){
-                            console.log(scope.chart.series[0].data[selectedRows[i]].select());
-                        }*/
+                        scope.gridSelectedID = selectedRow;
+                        scope.$apply();
 
-                        console.log('!!! Grid Selection...');
-                    })
+                        if(scope.chartSelectedID!=scope.gridSelectedID){
+                            scope.chart.series[0].data[selectedRow].select(true,false); //clear all other selection
+                        };
+                    });
 
                     console.log(scope.grid);
-
                 });
             }
         }
