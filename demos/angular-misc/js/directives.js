@@ -8,7 +8,7 @@ angular.module('mainApp.directives', [])
     .directive('highchart', function () {
         return {
             restrict: 'E',
-            template: '<div style="float: left; width:400px; height:400px;"></div>',
+            template: '<div></div>',
             replace: true,
             link: function (scope, element, attrs) {
 
@@ -46,22 +46,29 @@ angular.module('mainApp.directives', [])
                     scope.grid.setSelectionModel(new Slick.CellSelectionModel());
 
                     scope.grid.onSelectedRowsChanged.subscribe(function(e,args){
-                        var selectedRow = scope.grid.getSelectedRows()[0];
+                        var selectedRow = scope.grid.getDataItem(scope.grid.getSelectedRows()[0]);
 
-                        scope.gridSelectedID = selectedRow;
+                        scope.gridSelectedID = selectedRow.id;
                         scope.$apply();
 
                         if(scope.chartSelectedID!=scope.gridSelectedID){
-                            scope.chart.series[0].data[selectedRow].select(true,false); //clear all other selection
+                            var data = scope.chart.series[0].data;
+                            var pointID = [];
+                            for(var i=0;i<data.length;i++){
+                                if(data[i].id==selectedRow.id) pointID = i;
+                            }
+                            scope.chart.series[0].data[pointID].select(true,false); //clear all other selection
                         };
                     });
 
                     scope.grid.onCellChange.subscribe(function(e,args){
                         var item = args.item;
-                        console.log(item);
-                        scope.chart.series[0].data[item.id-1].update(item);
-
-                        console.log('Cell have changed...');
+                        var data = scope.chart.series[0].data;
+                        var pointID = [];
+                        for(var i=0;i<data.length;i++){
+                            if(data[i].id==item.id) pointID = i;
+                        }
+                        data[pointID].update(item);
                     });
 
                     console.log(scope.grid);

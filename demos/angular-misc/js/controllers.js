@@ -48,8 +48,8 @@ angular.module('mainApp.controllers', ['ngGrid'])
 
         $scope.columns = [
             {id: "id", name: "ID", field: "id"},
-            {id: "x", name: "X", field: "x", editor: Slick.Editors.Text},
-            {id: "y", name: "Y", field: "y", editor: Slick.Editors.Text}
+            {id: "x", name: "X", field: "x", editor: Slick.Editors.Integer},
+            {id: "y", name: "Y", field: "y", editor: Slick.Editors.Integer}
         ];
         $scope.options = {
             editable: true,
@@ -130,10 +130,15 @@ function highcharts_slickgrid_option(scope){
                 point: {
                     events: {
                         select: function() {
-                            scope.chartSelectedID = this.id-1;
+                            scope.chartSelectedID = this.id;
                             scope.$apply();
                             if(scope.chartSelectedID!=scope.gridSelectedID){
-                                scope.grid.setSelectedRows([this.id-1]);
+                                var data = scope.grid.getData();
+                                var rowID = [];
+                                for(var i=0;i<data.length;i++){
+                                    if(data[i].id==this.id) rowID = i;
+                                }
+                                scope.grid.setSelectedRows([rowID]);
                             }
                         }
                     }
