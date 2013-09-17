@@ -2,7 +2,7 @@
 <html lang="en" ng-app="mainApp">
 <head>
   <meta charset="utf-8">
-  <title>Angular-Highcharts App</title>  
+  <title>Angular-REST App</title>
   <link rel="stylesheet" href="css/app.css"/>    
 </head>
 <body>
@@ -11,22 +11,18 @@
       <br/>      
       <li><a href="../">../</a></li>  
       <br/>
-      <li><a href="#/line">Line chart</a></li>
+      <li><a href="#/get">GET request</a></li>
       <br/>       
-      <li><a href="#/scatter">Scatter chart</a></li>      
-      <br/> 
-      <li><a href="#/bar">Bar chart</a></li>
-      <br/>       
+      <li><a href="#/post">POST request</a></li>
+      <br/>
     </ul>
   </header>
 
   <div ng-view></div>
 
-  <script src="../lib/jquery/jquery-1.10.2.min.js"></script>
-  <script src="../lib/highcharts/highcharts.js"></script>
   <script src="../lib/angular/angular.js"></script>  
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
-  <script src="js/directives.js"></script>
+  <script src="js/services.js"></script>
 </body>
 </html>

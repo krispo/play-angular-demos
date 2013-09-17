@@ -6,6 +6,8 @@
 # Home page
 GET   /api/                           controllers.Application.index
 
+GET   /api/data                       controllers.Rest.getData
+
 # Map static resources from the /public folder to the /assets URL path
 GET   /api/assets/*file               controllers.Assets.at(path="/public", file)
 
@@ -35,14 +37,18 @@ GET   /angular-ng-grid/               controllers.UIAssets.at(path = "/demos/ang
 GET   /angular-ng-grid/*file          controllers.UIAssets.at(path = "/demos/angular-ng-grid", file)
 
 # angular-slickgrid app
-GET   /angular-slickgrid/               controllers.UIAssets.at(path = "/demos/angular-slickgrid", file = "index.html")
-GET   /angular-slickgrid/*file          controllers.UIAssets.at(path = "/demos/angular-slickgrid", file)
+GET   /angular-slickgrid/             controllers.UIAssets.at(path = "/demos/angular-slickgrid", file = "index.html")
+GET   /angular-slickgrid/*file        controllers.UIAssets.at(path = "/demos/angular-slickgrid", file)
 
-# angular-ng-grid app
+# angular-highcharts app
 GET   /angular-highcharts/            controllers.UIAssets.at(path = "/demos/angular-highcharts", file = "index.html")
 GET   /angular-highcharts/*file       controllers.UIAssets.at(path = "/demos/angular-highcharts", file)
 
-# angular-ng-grid app
+# angular-rest app
+GET   /angular-rest/                  controllers.UIAssets.at(path = "/demos/angular-rest", file = "index.html")
+GET   /angular-rest/*file             controllers.UIAssets.at(path = "/demos/angular-rest", file)
+
+# angular-misc app
 GET   /angular-misc/                  controllers.UIAssets.at(path = "/demos/angular-misc", file = "index.html")
 GET   /angular-misc/*file             controllers.UIAssets.at(path = "/demos/angular-misc", file)
 
