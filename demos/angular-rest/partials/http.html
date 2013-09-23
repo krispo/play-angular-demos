@@ -1,0 +1,70 @@
+<input type="text" ng-model="search" class="search-query" placeholder="Search">
+<table>
+    <thead>
+    <tr>
+        <th>Project</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>&nbsp;&nbsp;<a data-toggle="modal" ng-click="modalProject.add = {}" href="#modalAdd" class="glyphicon glyphicon-plus-sign"></a></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="project in projectList | filter:search">
+        <td><a href="{{project.site}}" target="_blank">{{ project.name }}</a></td>
+        <td>{{ project.description }}</td>
+        <td>{{ project.created | date:'dd/MM/yyyy H:mm' }}</td>
+        <td>&nbsp;
+            <a data-toggle="modal" ng-click="modalProject.edit = getCopy(project)" href="#modalEdit" class="glyphicon glyphicon-edit"></a>
+            <a ng-click="deleteData(project._id.$oid)" class="glyphicon glyphicon-remove"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+
+<!-- Modal -->
+<div class="modal" id="modalAdd">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align: center">
+                <input type="text" name="name" ng-model="modalProject.add.name" placeholder="name" required>
+                <input type="text" name="site" ng-model="modalProject.add.site" placeholder="website" required>
+                <textarea type="text" name="description" ng-model="modalProject.add.description" placeholder="description"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modalProject.add = {}">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="postData(modalProject.add)">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal" id="modalEdit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align: center">
+                <input type="text" name="name" ng-model="modalProject.edit.name" required>
+                <input type="text" name="site" ng-model="modalProject.edit.site" required>
+                <textarea type="text" name="description" ng-model="modalProject.edit.description"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modalProject.edit = {}">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="putData(modalProject.edit)">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<br/>
+
+<div>DETAILS -------------------------------------------------------------------------------------------</div>
+
+<div>Data:</div>
+<div>{{ projectList }}</div>
+
+<br/>
+
+<div>modalProject:</div>
+<div>{{ modalProject }}</div>

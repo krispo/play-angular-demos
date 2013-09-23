@@ -4,54 +4,58 @@
 
 ## ~~~ Play api routing
 # Home page
-GET   /api/                           controllers.Application.index
+GET      /api/                           controllers.Application.index
 
-GET   /api/data                       controllers.Rest.getData
+GET      /api/findAll                    controllers.Rest.findAll
+GET      /api/findByName                 controllers.Rest.getByName(name:String)
+POST     /api/create                     controllers.Rest.create
+PUT      /api/update                     controllers.Rest.update(oid:String)
+DELETE   /api/delete                     controllers.Rest.delete(oid:String)
 
 # Map static resources from the /public folder to the /assets URL path
-GET   /api/assets/*file               controllers.Assets.at(path="/public", file)
+GET      /api/assets/*file               controllers.Assets.at(path="/public", file)
 
 # Obtain require.js with built-in knowledge of how webjars resources can be
 # resolved
-GET   /lib/require.js                 controllers.WebJarAssets.requirejs
+GET      /lib/require.js                 controllers.WebJarAssets.requirejs
 
 # Enable webjar based resources to be returned
-GET   /webjars/*file                  controllers.WebJarAssets.at(file)
+GET      /webjars/*file                  controllers.WebJarAssets.at(file)
 
 
 ## ~~~ AngularJS
 # angular-seed app
-GET   /angular-seed/                  controllers.UIAssets.at(path = "/demos/angular-seed", file = "index.html")
-GET   /angular-seed/*file             controllers.UIAssets.at(path = "/demos/angular-seed", file)
+GET      /angular-seed/                  controllers.UIAssets.at(path = "/demos/angular-seed", file = "index.html")
+GET      /angular-seed/*file             controllers.UIAssets.at(path = "/demos/angular-seed", file)
 
 # angular-requirejs-seed app
-GET   /angular-requirejs-seed/        controllers.UIAssets.at(path = "/demos/angular-requirejs-seed", file = "index.html")
-GET   /angular-requirejs-seed/*file   controllers.UIAssets.at(path = "/demos/angular-requirejs-seed", file)
+GET      /angular-requirejs-seed/        controllers.UIAssets.at(path = "/demos/angular-requirejs-seed", file = "index.html")
+GET      /angular-requirejs-seed/*file   controllers.UIAssets.at(path = "/demos/angular-requirejs-seed", file)
 
 # angular-seed-play app
-GET   /angular-seed-play/             controllers.UIAssets.at(path = "/demos/angular-seed-play", file = "index.html")
-GET   /angular-seed-play/*file        controllers.UIAssets.at(path = "/demos/angular-seed-play", file)
+GET      /angular-seed-play/             controllers.UIAssets.at(path = "/demos/angular-seed-play", file = "index.html")
+GET      /angular-seed-play/*file        controllers.UIAssets.at(path = "/demos/angular-seed-play", file)
 
 # angular-ng-grid app
-GET   /angular-ng-grid/               controllers.UIAssets.at(path = "/demos/angular-ng-grid", file = "index.html")
-GET   /angular-ng-grid/*file          controllers.UIAssets.at(path = "/demos/angular-ng-grid", file)
+GET      /angular-ng-grid/               controllers.UIAssets.at(path = "/demos/angular-ng-grid", file = "index.html")
+GET      /angular-ng-grid/*file          controllers.UIAssets.at(path = "/demos/angular-ng-grid", file)
 
 # angular-slickgrid app
-GET   /angular-slickgrid/             controllers.UIAssets.at(path = "/demos/angular-slickgrid", file = "index.html")
-GET   /angular-slickgrid/*file        controllers.UIAssets.at(path = "/demos/angular-slickgrid", file)
+GET      /angular-slickgrid/             controllers.UIAssets.at(path = "/demos/angular-slickgrid", file = "index.html")
+GET      /angular-slickgrid/*file        controllers.UIAssets.at(path = "/demos/angular-slickgrid", file)
 
 # angular-highcharts app
-GET   /angular-highcharts/            controllers.UIAssets.at(path = "/demos/angular-highcharts", file = "index.html")
-GET   /angular-highcharts/*file       controllers.UIAssets.at(path = "/demos/angular-highcharts", file)
+GET      /angular-highcharts/            controllers.UIAssets.at(path = "/demos/angular-highcharts", file = "index.html")
+GET      /angular-highcharts/*file       controllers.UIAssets.at(path = "/demos/angular-highcharts", file)
 
 # angular-rest app
-GET   /angular-rest/                  controllers.UIAssets.at(path = "/demos/angular-rest", file = "index.html")
-GET   /angular-rest/*file             controllers.UIAssets.at(path = "/demos/angular-rest", file)
+GET      /angular-rest/                  controllers.UIAssets.at(path = "/demos/angular-rest", file = "index.html")
+GET      /angular-rest/*file             controllers.UIAssets.at(path = "/demos/angular-rest", file)
 
 # angular-misc app
-GET   /angular-misc/                  controllers.UIAssets.at(path = "/demos/angular-misc", file = "index.html")
-GET   /angular-misc/*file             controllers.UIAssets.at(path = "/demos/angular-misc", file)
+GET      /angular-misc/                  controllers.UIAssets.at(path = "/demos/angular-misc", file = "index.html")
+GET      /angular-misc/*file             controllers.UIAssets.at(path = "/demos/angular-misc", file)
 
 # main app (the lowest priority)
-GET   /                               controllers.UIAssets.at(path = "/demos/main", file = "index.html")
-GET   /*file                          controllers.UIAssets.at(path = "/demos/main", file)
+GET      /                               controllers.UIAssets.at(path = "/demos/main", file = "index.html")
+GET      /*file                          controllers.UIAssets.at(path = "/demos/main", file)
