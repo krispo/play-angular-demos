@@ -3,17 +3,25 @@
 </h4>
 
 
-<p>We define an <i>initial</i> object, and then assign it to a new object <i>datas</i> as a copy. So, these two objects are now independent.</p>
+<p>We define an <i>initial</i> object, and then assign it to a new object <i>initialAssign</i>. So, these two objects are bound.</p>
+<p>Now, assign <i>initial</i> object to a new object <i>initialCopy</i> as a copy. So, these two objects are now independent.</p>
 
-<div> initial:
+<div>initial:
     <span ng-repeat="data in initial">
         <input type="text" ng-model="data.data1" />
         <input type="text" ng-model="data.data2" />
     </span>
 </div>
 
-<div>&nbsp;datas:
-    <span ng-repeat="data in datas">
+<div>initialAssign:
+    <span ng-repeat="data in initialAssign">
+        <input type="text" ng-model="data.data1" />
+        <input type="text" ng-model="data.data2" />
+    </span>
+</div>
+
+<div>initialCopy:
+    <span ng-repeat="data in initialCopy">
         <input type="text" ng-model="data.data1" />
         <input type="text" ng-model="data.data2" />
     </span>
@@ -22,4 +30,5 @@
 
 <hr />
 <div>initial: {{ initial }}</div>
-<div>datas: {{ datas }}</div>
+<div>initialAssign: {{ initialAssign }}</div>
+<div>initialCopy: {{ initialCopy }}</div>

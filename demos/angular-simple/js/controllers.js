@@ -12,12 +12,14 @@ angular.module('mainApp.controllers', [])
             data2: 20
         }];
 
-        $scope.datas = angular.copy($scope.initial);
+        $scope.initialAssign = $scope.initial;
+
+        $scope.initialCopy = angular.copy($scope.initial);
 
         $scope.reset = function () {
 
-            $scope.datas = angular.copy($scope.initial);
+            $scope.initialCopy = angular.copy($scope.initial);
             // or
-            // angular.copy($scope.initial, $scope.datas);
+            // angular.copy($scope.initial, $scope.initialCopy);
         }
     })
