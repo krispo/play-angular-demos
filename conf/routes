@@ -36,6 +36,10 @@ GET      /angular-requirejs-seed/*file   controllers.UIAssets.at(path = "/demos/
 GET      /angular-seed-play/             controllers.UIAssets.at(path = "/demos/angular-seed-play", file = "index.html")
 GET      /angular-seed-play/*file        controllers.UIAssets.at(path = "/demos/angular-seed-play", file)
 
+# angular-rest app
+GET      /angular-simple/                controllers.UIAssets.at(path = "/demos/angular-simple", file = "index.html")
+GET      /angular-simple/*file           controllers.UIAssets.at(path = "/demos/angular-simple", file)
+
 # angular-ng-grid app
 GET      /angular-ng-grid/               controllers.UIAssets.at(path = "/demos/angular-ng-grid", file = "index.html")
 GET      /angular-ng-grid/*file          controllers.UIAssets.at(path = "/demos/angular-ng-grid", file)
