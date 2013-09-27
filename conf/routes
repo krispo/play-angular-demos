@@ -6,11 +6,11 @@
 # Home page
 GET      /api/                           controllers.Application.index
 
-GET      /api/findAll                    controllers.Rest.findAll
-GET      /api/findByName                 controllers.Rest.getByName(name:String)
-POST     /api/create                     controllers.Rest.create
-PUT      /api/update                     controllers.Rest.update(oid:String)
-DELETE   /api/delete                     controllers.Rest.delete(oid:String)
+GET      /api/projects                   controllers.Rest.findAll
+GET      /api/projects/:name             controllers.Rest.getByName(name:String)
+POST     /api/projects                   controllers.Rest.create
+PUT      /api/projects/:oid               controllers.Rest.update(oid:String)
+DELETE   /api/projects/:oid               controllers.Rest.delete(oid:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET      /api/assets/*file               controllers.Assets.at(path="/public", file)

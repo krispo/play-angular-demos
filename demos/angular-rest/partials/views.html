@@ -9,13 +9,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="project in projectList | filter:search">
+    <tr ng-repeat="project in projects | filter:search">
         <td><a href="{{project.site}}" target="_blank">{{ project.name }}</a></td>
         <td>{{ project.description }}</td>
         <td>{{ project.created | date:'dd/MM/yyyy H:mm' }}</td>
         <td>&nbsp;
             <a data-toggle="modal" ng-click="modalProject.edit = getCopy(project)" href="#modalEdit" class="glyphicon glyphicon-edit"></a>
-            <a ng-click="deleteData(project._id.$oid)" class="glyphicon glyphicon-remove"></a>
+            <a ng-click="deleteProject(project._id.$oid)" class="glyphicon glyphicon-remove"></a>
         </td>
     </tr>
     </tbody>
@@ -34,7 +34,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modalProject.add = {}">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="postData(modalProject.add)">Save changes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="postProject(modalProject.add)">Save changes</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -51,7 +51,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modalProject.edit = {}">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="putData(modalProject.edit)">Save changes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="putProject(modalProject.edit)">Save changes</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -62,7 +62,7 @@
 <div>DETAILS -------------------------------------------------------------------------------------------</div>
 
 <div>Data:</div>
-<div>{{ projectList }}</div>
+<div>{{ projects }}</div>
 
 <br/>
 

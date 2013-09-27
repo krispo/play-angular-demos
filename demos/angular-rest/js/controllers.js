@@ -10,71 +10,70 @@ angular.module('mainApp.controllers', [])
         /*
          * Function definitions
          */
-        $scope.getData = function (){
-            return $http({method:'GET',url: '/api/findAll'})
-                .success(function(data,status,headers,config){
-                    console.log('!!! SUCCESS getData');
-                    $scope.projectList = data;
+        $scope.getProject = function (){
+            return $http({method:'GET',url: '/api/projects'})
+                .success(function(data){
+                    console.log('!!! SUCCESS getProject');
+                    $scope.projects = data;
                 })
-                .error(function(data,status,headers,config){
-                    console.log('??? Failed getData...')
+                .error(function(){
+                    console.log('??? Failed getProject...')
                 });
         };
 
         //save to DB
-        $scope.postData = function (data){
-            return $http({method:'POST',url: '/api/create', data: data})
-                .success(function(data,status,headers,config){
-                    console.log('!!! SUCCESS postData');
-                    $rootScope.$broadcast('getData'); // to update projectList with new data
+        $scope.postProject = function (project){
+            return $http({method:'POST',url: '/api/projects', data: project})
+                .success(function(data){
+                    console.log('!!! SUCCESS postProject');
+                    $rootScope.$broadcast('getProject'); // to update projects with new data
                 })
-                .error(function(data,status,headers,config){
-                    console.log('??? Failed postData...')
+                .error(function(){
+                    console.log('??? Failed postProject...')
                 });
         };
 
         //save or update in DB by document id
-        $scope.putData = function (data){
+        $scope.putProject = function (project){
             return $http({
                 method:'PUT',
-                url: '/api/update',
-                params: {oid: data._id.$oid},
+                url: '/api/projects/'+project._id.$oid,
                 data:{
-                    name: data.name,
-                    site: data.site,
-                    description: data.description
+                    name: project.name,
+                    site: project.site,
+                    description: project.description
                 }
             })
-                .success(function(data,status,headers,config){
-                    console.log('!!! SUCCESS putData');
-                    $rootScope.$broadcast('getData'); // to update projectList with new data
+                .success(function(data){
+                    console.log('!!! SUCCESS putProject');
+                    $rootScope.$broadcast('getProject'); // to update projects with new data
                 })
-                .error(function(data,status,headers,config){
-                    console.log('??? Failed putData...')
+                .error(function(){
+                    console.log('??? Failed putProject...')
                 });
         };
 
         // remove from DB by document id - project._id.$oid
-        $scope.deleteData = function (oid){
-            return $http.delete('/api/delete', {params: {oid: oid}})
-                .success(function(data,status,headers,config){
-                    console.log('!!! SUCCESS deleteData');
-                    $rootScope.$broadcast('getData'); // to update projectList with new data
+        $scope.deleteProject = function (oid){
+            return $http.delete('/api/projects/'+oid)
+                .success(function(data){
+                    console.log('!!! SUCCESS deleteProject');
+                    $rootScope.$broadcast('getProject'); // to update projects with new data
                 })
-                .error(function(data,status,headers,config){
-                    console.log('??? Failed deleteData...')
+                .error(function(){
+                    console.log('??? Failed deleteProject...')
                 });
         };
 
         /*
-         * Retrieve data from DB and store it to $scope.data variable.
+         * Retrieve data from DB and store it to $scope.projects variable.
          * Initialize and refresh data after data is changed in DB
          */
-        $scope.getData();
+        $scope.getProject();
 
         // Catch the broadcast call
-        $scope.$on('getData', function(){
-            $scope.getData();
+        $scope.$on('getProject', function(){
+            $scope.getProject();
         });
 
         // initialize template for modal dialogs (add and edit project element)
@@ -85,11 +84,83 @@ angular.module('mainApp.controllers', [])
 
         // return copy of any object
         $scope.getCopy = function(object){
-           return angular.copy(object);
+            return angular.copy(object);
         }
     })
 
     /* $resource */
-    .controller('resourceCtrl', function($scope){
+    .controller('resourceCtrl', function($scope,$http,$rootScope,Project){
+        /*
+         * Function definitions
+         */
 
-    })
+        $scope.projects = Project.query(function(){
+            console.log('!!! SUCCESS getProject Resource !!!');
+        });
+
+        //save to DB
+        $scope.postProject = function (project){
+            return new Project(project).$save(
+                function(){
+                    console.log('!!! SUCCESS postProject');
+                    $rootScope.$broadcast('getProject'); // to update projects with new data
+                },
+                function(){
+                    console.log('??? Failed postProject...')
+                }
+            );
+        };
+
+        //save or update in DB by document id
+        $scope.putProject = function (project){
+            var data = {
+                name: project.name,
+                site: project.site,
+                description: project.description
+            };
+            return new Project(data).$update(
+                {oid: project._id.$oid},
+                function(){
+                    console.log('!!! SUCCESS putProject');
+                    $rootScope.$broadcast('getProject'); // to update projects with new data
+                },function(){
+                    console.log('??? Failed putProject...')
+                });
+        };
+
+        // remove from DB by document id - project._id.$oid
+        $scope.deleteProject = function (oid){
+            return new Project().$delete(
+                {oid: oid},
+                function(){
+                    console.log('!!! SUCCESS deleteProject');
+                    $rootScope.$broadcast('getProject'); // to update projects with new data
+                },
+                function(){
+                    console.log('??? Failed deleteProject...')
+                });
+        };
+
+        /*
+         * Retrieve data from DB and store it to $scope.projects variable.
+         * Initialize and refresh data after data is changed in DB
+         */
+
+        // Catch the broadcast call
+        $scope.$on('getProject', function(){
+            $scope.projects = Project.query();
+        });
+
+        // initialize template for modal dialogs (add and edit project element)
+        $scope.modalProject = {
+            add:{},
+            edit:{}
+        };
+
+        // return copy of any object
+        $scope.getCopy = function(object){
+            return angular.copy(object);
+        }
+
+    });
+
