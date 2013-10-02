@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 'ngResource'])
+var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 'ngRoute', 'ngResource'])
     .config(function($routeProvider) {
         $routeProvider
             .when('/qwe', {templateUrl: 'partials/event-list.html', controller: 'EventListCtrl'})
@@ -9,7 +9,7 @@ var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 
             .when('/logout', {templateUrl:'partials/login.html', controller: 'LogoutCtrl'})
             .otherwise({redirectTo: '/'});
     })
-    .config(function($httpProvider){
+    .config(['$rootScope', function($httpProvider){
         $httpProvider.interceptors.push(function($rootScope,$location,$q){
             return {
                 'request': function(request){
@@ -30,4 +30,4 @@ var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 
                 }
             };
         });
-    });
+    }]);
