@@ -2,9 +2,18 @@
 
 
 // Declare app level module which depends on filters, and services
-var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 'ngRoute', 'ngResource']).
-config(['$routeProvider', function($routeProvider) {
-	$routeProvider.when('/http', {templateUrl: 'partials/views.html', controller: 'httpCtrl'});
-	$routeProvider.when('/resource', {templateUrl: 'partials/views.html', controller: 'resourceCtrl'});
-	$routeProvider.otherwise({redirectTo: '/'});
-}]);
+var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 'ngResource', 'ui.router'])
+    .config(function($stateProvider, $urlRouterProvider){
+        $urlRouterProvider.otherwise('/');
+        $stateProvider
+            .state('http',{
+                url: '/http',
+                templateUrl: 'partials/views.html',
+                controller: 'httpCtrl'
+            })
+            .state('resource',{
+                url: '/resource',
+                templateUrl: 'partials/views.html',
+                controller: 'resourceCtrl'
+            })
+    })
