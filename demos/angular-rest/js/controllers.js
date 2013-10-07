@@ -11,7 +11,7 @@ angular.module('mainApp.controllers', [])
          * Function definitions
          */
         $scope.getProject = function (){
-            return $http({method:'GET',url: '/api/projects'})
+            return $http({method:'GET',url: '/api/rest/projects'})
                 .success(function(data){
                     console.log('!!! SUCCESS getProject');
                     $scope.projects = data;
@@ -23,7 +23,7 @@ angular.module('mainApp.controllers', [])
 
         //save to DB
         $scope.postProject = function (project){
-            return $http({method:'POST',url: '/api/projects', data: project})
+            return $http({method:'POST',url: '/api/rest/projects', data: project})
                 .success(function(data){
                     console.log('!!! SUCCESS postProject');
                     $rootScope.$broadcast('getProject'); // to update projects with new data
@@ -37,7 +37,7 @@ angular.module('mainApp.controllers', [])
         $scope.putProject = function (project){
             return $http({
                 method:'PUT',
-                url: '/api/projects/'+project._id.$oid,
+                url: '/api/rest/projects/'+project._id.$oid,
                 data:{
                     name: project.name,
                     site: project.site,
@@ -55,7 +55,7 @@ angular.module('mainApp.controllers', [])
 
         // remove from DB by document id - project._id.$oid
         $scope.deleteProject = function (oid){
-            return $http.delete('/api/projects/'+oid)
+            return $http.delete('/api/rest/projects/'+oid)
                 .success(function(data){
                     console.log('!!! SUCCESS deleteProject');
                     $rootScope.$broadcast('getProject'); // to update projects with new data

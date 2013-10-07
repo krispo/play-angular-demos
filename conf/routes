@@ -6,13 +6,13 @@
 # Home page
 GET      /api/                           controllers.Application.index
 
-GET      /api/projects                   controllers.Rest.findAll
-GET      /api/projects/:name             controllers.Rest.getByName(name:String)
-POST     /api/projects                   controllers.Rest.create
-PUT      /api/projects/:oid               controllers.Rest.update(oid:String)
-DELETE   /api/projects/:oid               controllers.Rest.delete(oid:String)
+GET      /api/rest/projects              controllers.Rest.findAll
+GET      /api/rest/projects/:name        controllers.Rest.getByName(name:String)
+POST     /api/rest/projects              controllers.Rest.create
+PUT      /api/rest/projects/:oid         controllers.Rest.update(oid:String)
+DELETE   /api/rest/projects/:oid         controllers.Rest.delete(oid:String)
 
-#GET /api/sessions
+POST     /api/sessions                   controllers.Auth.authenticate
 
 # Map static resources from the /public folder to the /assets URL path
 GET      /api/assets/*file               controllers.Assets.at(path="/public", file)
@@ -39,8 +39,8 @@ GET      /angular-seed-play/             controllers.UIAssets.at(path = "/demos/
 GET      /angular-seed-play/*file        controllers.UIAssets.at(path = "/demos/angular-seed-play", file)
 
 # angular-auth app
-GET      /angular-auth/                controllers.UIAssets.at(path = "/demos/angular-auth", file = "index.html")
-GET      /angular-auth/*file           controllers.UIAssets.at(path = "/demos/angular-auth", file)
+GET      /angular-auth/                  controllers.UIAssets.at(path = "/demos/angular-auth", file = "index.html")
+GET      /angular-auth/*file             controllers.UIAssets.at(path = "/demos/angular-auth", file)
 
 
 # angular-rest app

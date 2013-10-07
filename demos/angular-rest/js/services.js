@@ -6,7 +6,7 @@ angular.module('mainApp.services', [])
     .factory('Project', function($resource){
         return $resource(
             //url
-            '../api/projects/:name:oid',
+            '../api/rest/projects/:name:oid',
             //paramDefaults
             {name:'@_name', oid:'@_oid'},
             //actions

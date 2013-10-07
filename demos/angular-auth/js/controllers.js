@@ -11,12 +11,21 @@ angular.module('mainApp.controllers', [])
             password:''
         };
 
+        $rootScope.loggedIn = false;
+
         $scope.login = function(){
-            $scope.user = SessionService.save($scope.user, function(success){
+            SessionService.save($scope.user, function(success){
+                console.log('!!!');
+                console.log('success');
                 $rootScope.loggedIn = true;
                 $location.path('/');
             }, function(error){
+                console.log('???');
+                console.log(error);
                 $rootScope.loginError = true;
             })
         }
+    })
+    .controller('EventListCtrl', function(){
+
     })

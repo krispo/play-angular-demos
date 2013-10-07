@@ -4,12 +4,12 @@
 var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 'ngRoute', 'ngResource'])
     .config(function($routeProvider) {
         $routeProvider
-            .when('/qwe', {templateUrl: 'partials/event-list.html', controller: 'EventListCtrl'})
-            .when('/', {templateUrl:'partials/login.html', controller: 'LoginCtrl'})
+            .when('/', {templateUrl: 'partials/event-list.html', controller: 'EventListCtrl'})
+            .when('/login', {templateUrl:'partials/login.html', controller: 'LoginCtrl'})
             .when('/logout', {templateUrl:'partials/login.html', controller: 'LogoutCtrl'})
             .otherwise({redirectTo: '/'});
     })
-    .config(['$rootScope', function($httpProvider){
+    .config(function($httpProvider){
         $httpProvider.interceptors.push(function($rootScope,$location,$q){
             return {
                 'request': function(request){
@@ -30,4 +30,4 @@ var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 
                 }
             };
         });
-    }]);
+    });
