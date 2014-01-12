@@ -11,13 +11,12 @@ object Auth extends Controller with MongoController {
 
   def collection = db.collection[JSONCollection]("user")
 
-  def authenticate = Action(parse.json) { implicit request =>
-    Async {
-      println("Request body: <<" + request.body + ">>")
+  def authenticate = Action.async(parse.json) { implicit request =>
+          println("Request body: <<" + request.body + ">>")
       collection
         .find(request.body)
         .cursor[JsObject]
-        .toList
+        .collect[List]()
         .map(_ match {
           case Nil =>
             println("!!! users NOT found !!!")
@@ -26,7 +25,6 @@ object Auth extends Controller with MongoController {
             println("!!! users from db: " + users)
             Ok
         })
-    }
-  }
+      }
 
 }

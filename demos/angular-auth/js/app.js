@@ -13,6 +13,10 @@ var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 
         $httpProvider.interceptors.push(function($rootScope,$location,$q){
             return {
                 'request': function(request){
+
+                    console.log('request')
+                    console.log(request);
+
                     // if we're not logged-in to the AngularJS app, redirect to login page
                     $rootScope.loggedIn = $rootScope.loggedIn || $rootScope.username;
                     if (!$rootScope.loggedIn && $location.path() != '/login'){
@@ -21,6 +25,10 @@ var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 
                     return request;
                 },
                 'responseError': function(rejection){
+
+                    console.log('rejection')
+                    console.log(rejection);
+
                     // if we're not logged-in to the web service, redirect to login page
                     if (rejection.status === 401 && $location.path() != '/login'){
                         $rootScope.loggedIn = false;
