@@ -6,13 +6,24 @@
 # Home page
 GET      /api/                           controllers.Application.index
 
+# for angular-rest app
 GET      /api/rest/projects              controllers.Rest.findAll
 GET      /api/rest/projects/:name        controllers.Rest.getByName(name:String)
 POST     /api/rest/projects              controllers.Rest.create
 PUT      /api/rest/projects/:oid         controllers.Rest.update(oid:String)
 DELETE   /api/rest/projects/:oid         controllers.Rest.delete(oid:String)
 
-POST     /api/sessions                   controllers.Auth.authenticate
+# for angular-auth app
+POST     /api/auth/signup                controllers.Auth.signup
+POST     /api/auth/signin                controllers.Auth.signin
+GET      /api/auth/signout               controllers.Auth.signout
+GET      /api/auth/authorize             controllers.Auth.authorize
+
+GET      /api/auth/user/:email           controllers.Auth.exists(email)
+GET      /api/auth/user                  controllers.Auth.getUser
+POST     /api/auth/user                  controllers.Auth.createUser
+DELETE   /api/auth/user                  controllers.Auth.removeUser
+#...
 
 # Map static resources from the /public folder to the /assets URL path
 GET      /api/assets/*file               controllers.Assets.at(path="/public", file)

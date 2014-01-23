@@ -11,6 +11,7 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
     jdbc,
     anorm,
+    filters,
     // Adding WebJars dependencies
     "org.webjars" % "angularjs" % "1.2.7",
     "org.webjars" % "requirejs" % "2.1.8",

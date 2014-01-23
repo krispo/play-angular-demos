@@ -1,41 +1,48 @@
 'use strict';
 
-// Declare app level module which depends on filters, and services
-var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 'ngRoute', 'ngResource'])
+// Declare app level module which depends on controllers, services and directives
+var app = angular.module('mainApp', ['mainApp.controllers', 'mainApp.services', 'mainApp.directives', 'ngCookies', 'ngRoute'])
+
     .config(function($routeProvider) {
+
         $routeProvider
-            .when('/', {templateUrl: 'partials/event-list.html', controller: 'EventListCtrl'})
-            .when('/login', {templateUrl:'partials/login.html', controller: 'LoginCtrl'})
-            .when('/logout', {templateUrl:'partials/login.html', controller: 'LogoutCtrl'})
+            .when('/', {templateUrl:'partials/home.html', controller: 'MainCtrl'})
+            .when('/about', {templateUrl:'partials/about.html', controller: 'MainCtrl'})
+            .when('/todo', {templateUrl: 'partials/todo.html', controller: 'TodoCtrl', requireAuthorization: true})
+
+            .when('/signin', {templateUrl:'partials/signin.html', controller: 'SigninCtrl'})
+            .when('/signup', {templateUrl:'partials/signup.html',controller:'SignupCtrl'})
+
             .otherwise({redirectTo: '/'});
+
     })
-    .config(function($httpProvider){
-        $httpProvider.interceptors.push(function($rootScope,$location,$q){
-            return {
-                'request': function(request){
 
-                    console.log('request')
-                    console.log(request);
+    .run(function($rootScope, $location, security){
 
-                    // if we're not logged-in to the AngularJS app, redirect to login page
-                    $rootScope.loggedIn = $rootScope.loggedIn || $rootScope.username;
-                    if (!$rootScope.loggedIn && $location.path() != '/login'){
-                        $location.path('/login');
-                    }
-                    return request;
+        /* Subscribe on Route Change event */
+        $rootScope.$on('$routeChangeStart',function(event,next){
+
+            /* Check authorization */
+            security.isAuthorized(
+                function success(){
+                    /* Is Authorized */
+                    $rootScope.security = {
+                        'isAuthorized': true,
+                        'email': security.email
+                    };
                 },
-                'responseError': function(rejection){
+                function error(){
+                    /* Is Not Authorized */
+                    $rootScope.security = {
+                        'isAuthorized': false,
+                        'email': ''
+                    };
 
-                    console.log('rejection')
-                    console.log(rejection);
-
-                    // if we're not logged-in to the web service, redirect to login page
-                    if (rejection.status === 401 && $location.path() != '/login'){
-                        $rootScope.loggedIn = false;
-                        $location.path('/login');
+                    /* Check if the page requires authorization */
+                    if (next.requireAuthorization || false) {
+                        $location.path('/signin');
                     }
-                    return $q.reject(rejection);
                 }
-            };
+            );
         });
-    });
+    })

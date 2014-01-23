@@ -4,28 +4,93 @@
 
 angular.module('mainApp.controllers', [])
 
-    /* Login Controller */
-    .controller('LoginCtrl', function($scope,$rootScope,$location,SessionService){
-        $scope.user = {
-            username:'',
-            password:''
+    /* Main Controller */
+    .controller('MainCtrl',function($scope, $location, security, serverAPI){
+
+        /* Handle active location for header */
+        $scope.isActive = function(viewLocation){
+            return viewLocation === $location.path();
         };
 
-        $rootScope.loggedIn = false;
+        /* Account information */
+        $scope.account = function(){
+            serverAPI.userInfo(
+                function(data){
+                    $scope.user = data;
+                },
+                function(){
+                    $scope.user = 'Error...';
+                }
+            );
+        };
 
-        $scope.login = function(){
-            SessionService.save($scope.user, function(success){
-                console.log('!!!');
-                console.log('success');
-                $rootScope.loggedIn = true;
-                $location.path('/');
-            }, function(error){
-                console.log('???');
-                console.log(error);
-                $rootScope.loginError = true;
-            })
-        }
+        /* Delete Account */
+        $scope.deleteAccount = function(){
+            serverAPI.deleteAccount(
+                function(){
+                    /* success */
+                    $location.path('/')
+                },
+                function(){
+                    /* error */
+                }
+            );
+        };
+
+        /* Signout */
+        $scope.signoutError = false;
+        $scope.signout = function(){
+            security.signout(
+                function(){
+                    /* success */
+                    $location.path('/')
+                },
+                function(){
+                    /* error */
+                    $scope.signinError = true;
+                });
+        };
     })
-    .controller('EventListCtrl', function(){
+
+    /* Signin Controller */
+    .controller('SigninCtrl', function($scope,$location,security){
+
+        $scope.signinError = false;
+
+        $scope.signin = function(){
+            security.signin($scope.userform,
+                function(){
+                    /* success */
+                    $location.path('/');
+                },
+                function(){
+                    /* error */
+                    $scope.signinError = true;
+                });
+        };
+
+    })
+
+    /* Signup Controller */
+    .controller('SignupCtrl', function($scope,$location,security){
+
+        $scope.signupError = false;
+
+        $scope.signup = function(){
+            security.signup($scope.userform,
+                function(){
+                    /* success */
+                    $location.path('/');
+                },
+                function(){
+                    /* error */
+                    $scope.signupError = true;
+                });
+        };
+
+    })
+
+    /* TODO Controller */
+    .controller('TodoCtrl', function(){
 
     })

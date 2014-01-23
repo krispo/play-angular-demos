@@ -4,21 +4,88 @@
     <meta charset="utf-8">
     <title>Angular-Authenticate</title>
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/app.css"/>
-    <!-- Custom styles for this template -->
     <link rel="stylesheet" href="css/signin.css">
+    <link rel="stylesheet" href="css/signup.css">
+
+    <style type="text/css">
+        body {
+            min-height: 2000px;
+            padding-top: 70px;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<div ng-view>Inspired of </div>
+<div class="container" ng-controller="MainCtrl">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" ng-href='/'> ../ </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav nav">
+                    <li ng-class="{ active: isActive('/')}"><a ng-href="#/">Home</a></li>
+                    <li ng-class="{ active: isActive('/about')}"><a ng-href="#/about">About</a></li>
+                    <li ng-class="{ active: isActive('/todo')}"><a ng-href="#/todo">
+                        <span class="glyphicon glyphicon-lock" ng-hide="security.isAuthorized"></span>Todo</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav nav pull-right" >
+                    <li ng-class="{ active: isActive('/signin')}" ng-hide="security.isAuthorized"><a ng-href="#/signin">Sign In</a> </li>
+                    <li ng-class="{ active: isActive('/signup')}" ng-hide="security.isAuthorized"><a ng-href="#/signup">Sign Up</a> </li>
+                    <li class="dropdown" ng-show="security.isAuthorized">
+                        <a href class="dropdown-toggle" data-toggle="dropdown">{{security.email()}} <b class="glyphicon glyphicon-cog"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#modalAccount" data-toggle="modal" ng-click="account()"><b class="glyphicon glyphicon-user"></b> Account</a></li>
+                            <li><a href ng-click="deleteAccount()"><b class="glyphicon glyphicon-trash"></b> Remove Account</a></li>
+                            <li><a href ng-click="signout()"><b class="glyphicon glyphicon-log-out"></b> Sign Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modalAccount">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" style="text-align: left">
+
+                    <table>
+                        <thead> <tr><th>Field</th> <th>Value</th></tr> </thead>
+                        <tbody>
+                        <tr><td>Email</td> <td>{{ user.email }}</td></tr>
+                        <tr><td>Password</td> <td>{{ user.password }}</td></tr>
+                        <tr><td>Info</td> <td>{{ user.info }}</td></tr>
+                        <tr><td>Created date</td> <td>{{ user.created | date:'dd/MM/yyyy H:mm' }}</td></tr>
+                        <tr><td>session_token</td> <td>{{ user.session_token }}</td></tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>
+
+<div ng-view></div>
 
 <script src="../lib/jquery/jquery-1.10.2.min.js"></script>
 <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="../lib/angular/angular.min.js"></script>
-<script src="../lib/angular/angular-resource.min.js"></script>
 <script src="../lib/angular/angular-route.min.js"></script>
+<script src="../lib/angular/angular-cookies.min.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers.js"></script>
 <script src="js/services.js"></script>
+<script src="js/directives.js"></script>
 </body>
 </html>
