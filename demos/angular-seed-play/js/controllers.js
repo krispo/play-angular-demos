@@ -2,18 +2,15 @@
 
 'use strict';
 
-define(function() {
+define(['angular'], function(angular){
 
-/* Controllers */
+   /* Controllers */
 
-var controllers = {};
+   angular.module('myApp.controllers', [])
+       .controller('MyCtrl1', function(){
 
-controllers.MyCtrl1 = function() {}
-controllers.MyCtrl1.$inject = [];
+       })
+       .controller('MyCtrl2', function(){
 
-controllers.MyCtrl2 = function() {}
-controllers.MyCtrl2.$inject = [];
-
-return controllers;
-
+       })
 });

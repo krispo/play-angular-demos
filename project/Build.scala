@@ -13,8 +13,8 @@ object ApplicationBuild extends Build {
     anorm,
     filters,
     // Adding WebJars dependencies
-    "org.webjars" % "angularjs" % "1.2.7",
-    "org.webjars" % "requirejs" % "2.1.8",
+    "org.webjars" % "angularjs" % "1.2.9",
+    "org.webjars" % "requirejs" % "2.1.10",
     "org.webjars" %% "webjars-play" % "2.2.1",
     // Adding MongoDB dependencies
     "org.reactivemongo" %% "play2-reactivemongo" % "0.11.0-SNAPSHOT")
