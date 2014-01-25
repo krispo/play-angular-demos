@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/play-angular-demos -Dhttp.port=${PORT} ${JAVA_OPTS} -Dmongodb.uri=${MONGOHQ_URL}
+web: target/universal/stage/bin/play-angular-demos -Dhttp.port=${PORT} -Dmongodb.uri=${MONGOHQ_URL}
